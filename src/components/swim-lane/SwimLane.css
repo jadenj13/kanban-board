@@ -1,0 +1,11 @@
+.lane {
+  background-color: var(--white);
+  padding: var(--md-pd);
+  box-shadow: 0 0 6px -4px #777;
+}
+
+.lane--heading {
+  font-size: 1.6rem;
+  margin: 0.8rem 0;
+  text-align: center;
+}

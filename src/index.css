@@ -1,5 +1,14 @@
 @import-normalize;
 
+:root {
+  font-size: 10px;
+
+  --off-white: #f5f5f9;
+  --white: #fefefe;
+  --lg-pd: 3rem;
+  --md-pd: 1.5rem;
+}
+
 body {
   margin: 0;
   font-family: sans-serif;

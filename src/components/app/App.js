@@ -4,11 +4,12 @@ import './App.css';
 
 const App = () => {
   const [swimLanes] = useState(['To Do', 'In Progress', 'Testing', 'Done']);
+  const [title] = useState('Project A');
 
   return (
-    <>
-      <Board swimLanes={swimLanes} />
-    </>
+    <div className="app">
+      <Board swimLanes={swimLanes} title={title} />
+    </div>
   );
 };
 

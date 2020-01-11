@@ -1,0 +1,15 @@
+.board {
+  height: 100%;
+  padding: var(--lg-pd);
+}
+
+.board--title {
+  text-align: center;
+  font-size: 3.2rem;
+}
+
+.board--content {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(300px, 1fr));
+  grid-gap: var(--lg-pd);
+}
