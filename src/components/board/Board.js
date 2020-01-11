@@ -6,7 +6,12 @@ import './Board.css';
 const Board = ({ swimLanes, title }) => (
   <div className="board">
     <h1 className="board--title">{title}</h1>
-    <div className="board--content">
+    <div
+      className="board--content"
+      style={{
+        gridTemplateColumns: `repeat(${swimLanes.length}, minmax(300px, 1fr))`,
+      }}
+    >
       {swimLanes.map(swimLane => (
         <SwimLane heading={swimLane} key={swimLane} />
       ))}

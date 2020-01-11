@@ -3,8 +3,10 @@ import Board from '../board/Board';
 import './App.css';
 
 const App = () => {
-  const [swimLanes] = useState(['To Do', 'In Progress', 'Testing', 'Done']);
-  const [title] = useState('Project A');
+  const [swimLanes] = useState(
+    localStorage.getItem('swim-lanes') || ['To Do', 'In Progress', 'Done'],
+  );
+  const [title] = useState(localStorage.getItem('title') || 'Project A');
 
   return (
     <div className="app">

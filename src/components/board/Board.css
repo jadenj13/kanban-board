@@ -10,6 +10,5 @@
 
 .board--content {
   display: grid;
-  grid-template-columns: repeat(4, minmax(300px, 1fr));
   grid-gap: var(--lg-pd);
 }
