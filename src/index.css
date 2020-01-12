@@ -7,6 +7,7 @@
   --white: #fefefe;
   --lg-pd: 3rem;
   --md-pd: 1.5rem;
+  --sm-pd: 1rem 0.75rem;
 }
 
 body {
