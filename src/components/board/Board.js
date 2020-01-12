@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 import SwimLane from '../swim-lane/SwimLane';
 import './Board.css';
 
-const Board = ({ swimLanes, title, tasks }) => {
+const Board = ({ swimLanes, title, tasks, updateTask }) => {
   const lanes = swimLanes.map(lane => {
     const laneTasks = tasks.filter(task => task.lane === lane);
 
@@ -11,19 +13,26 @@ const Board = ({ swimLanes, title, tasks }) => {
   });
 
   return (
-    <div className="board">
-      <h1 className="board--title">{title}</h1>
-      <div
-        className="board--content"
-        style={{
-          gridTemplateColumns: `repeat(${swimLanes.length}, minmax(300px, 1fr))`,
-        }}
-      >
-        {lanes.map(({ lane, laneTasks }) => (
-          <SwimLane heading={lane} tasks={laneTasks} key={lane} />
-        ))}
+    <DndProvider backend={Backend}>
+      <div className="board">
+        <h1 className="board--title">{title}</h1>
+        <div
+          className="board--content"
+          style={{
+            gridTemplateColumns: `repeat(${swimLanes.length}, minmax(300px, 1fr))`,
+          }}
+        >
+          {lanes.map(({ lane, laneTasks }) => (
+            <SwimLane
+              heading={lane}
+              tasks={laneTasks}
+              updateTask={updateTask}
+              key={lane}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </DndProvider>
   );
 };
 
@@ -31,12 +40,13 @@ Board.propTypes = {
   swimLanes: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(
-    PropTypes.objectOf({
+    PropTypes.shape({
       task: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
       lane: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  updateTask: PropTypes.func.isRequired,
 };
 
 export default Board;

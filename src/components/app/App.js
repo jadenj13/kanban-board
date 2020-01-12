@@ -7,7 +7,7 @@ const App = () => {
     localStorage.getItem('swim-lanes') || ['To Do', 'In Progress', 'Done'],
   );
   const [title] = useState(localStorage.getItem('title') || 'Project A');
-  const [tasks] = useState([
+  const [tasks, setTasks] = useState([
     {
       task: 'Add ability to edit title',
       id: 1,
@@ -15,9 +15,28 @@ const App = () => {
     },
   ]);
 
+  const updateTask = (taskId, lane) => {
+    const newTasks = tasks.map(task => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          lane,
+        };
+      }
+      return task;
+    });
+
+    setTasks(newTasks);
+  };
+
   return (
     <div className="app">
-      <Board swimLanes={swimLanes} title={title} tasks={tasks} />
+      <Board
+        swimLanes={swimLanes}
+        title={title}
+        tasks={tasks}
+        updateTask={updateTask}
+      />
     </div>
   );
 };
