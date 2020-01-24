@@ -9,18 +9,3 @@
   margin: 1.6rem 0;
   text-align: center;
 }
-
-.lane--footer {
-  padding: 0.4rem;
-  margin-top: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 1.3rem;
-  color: rgba(0, 0, 0, 0.8);
-  border-radius: 2px;
-}
-
-.lane--footer:hover {
-  background-color: #e7e7e7;
-}

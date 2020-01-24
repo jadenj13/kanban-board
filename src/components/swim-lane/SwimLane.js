@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import Card from '../card/Card';
+import Button from '../button/Button';
 import { ReactComponent as Plus } from '../../assets/add-24px.svg';
 import './SwimLane.css';
+
+const Modal = React.lazy(() => import('../modal/Modal'));
 
 const SwimLane = ({ heading, tasks, updateTask }) => {
   const [{ isOver }, drop] = useDrop({
@@ -13,6 +16,11 @@ const SwimLane = ({ heading, tasks, updateTask }) => {
       isOver: !!mon.isOver(),
     }),
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(currentState => !currentState);
+  };
 
   return (
     <div className="lane">
@@ -30,8 +38,28 @@ const SwimLane = ({ heading, tasks, updateTask }) => {
           ))}
         </div>
         <div className="lane--footer">
-          <Plus />
-          <span>Add Task</span>
+          <Suspense
+            fallback={
+              <Button>
+                <>Loading...</>
+              </Button>
+            }
+          >
+            <Button onClick={toggleModal}>
+              <>
+                <Plus />
+                <span>Add Task</span>
+              </>
+            </Button>
+            {isModalOpen && (
+              <Modal closeModal={toggleModal}>
+                <>
+                  <h6 className="modal--heading">Add Task</h6>
+                  <div className="modal--body">asdfasdf</div>
+                </>
+              </Modal>
+            )}
+          </Suspense>
         </div>
       </div>
     </div>

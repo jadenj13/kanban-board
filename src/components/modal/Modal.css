@@ -1,0 +1,66 @@
+html,
+body {
+  overflow: hidden;
+}
+
+.modal--backdrop {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.modal--heading-actions {
+  position: relative;
+}
+
+.modal--close {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.modal--content {
+  width: 95vw;
+  max-width: 550px;
+  max-height: 90vh;
+  padding: var(--lg-pd);
+  background-color: var(--white);
+  pointer-events: auto;
+  overflow: scroll;
+}
+
+.modal--heading {
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.modal--heading::after {
+  display: block;
+  margin: 1.6rem 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--black);
+  content: '';
+}
+
+.modal--body {
+  font-size: 1.6rem;
+}
