@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Board from '../board/Board';
+import useLocalStorage from '../../hooks/use-local-storage';
 import './App.css';
 
 const App = () => {
-  const [swimLanes] = useState(
-    localStorage.getItem('swim-lanes') || ['To Do', 'In Progress', 'Done'],
-  );
-  const [title] = useState(localStorage.getItem('title') || 'Project A');
-  const [tasks, setTasks] = useState([
+  const [swimLanes] = useLocalStorage('lanes', [
+    'To Do',
+    'In Progress',
+    'Done',
+  ]);
+  const [title] = useLocalStorage('board-name', 'Project A');
+  const [tasks, setTasks] = useLocalStorage('tasks', [
     {
       task: 'Add ability to edit title',
       id: 1,
