@@ -5,7 +5,7 @@ import Backend from 'react-dnd-html5-backend';
 import SwimLane from '../swim-lane/SwimLane';
 import './Board.css';
 
-const Board = ({ swimLanes, title, tasks, updateTask }) => {
+const Board = ({ swimLanes, title, tasks, updateTask, addTask }) => {
   const lanes = swimLanes.map(lane => {
     const laneTasks = tasks.filter(task => task.lane === lane);
 
@@ -27,6 +27,7 @@ const Board = ({ swimLanes, title, tasks, updateTask }) => {
               heading={lane}
               tasks={laneTasks}
               updateTask={updateTask}
+              addTask={addTask}
               key={lane}
             />
           ))}
@@ -47,6 +48,7 @@ Board.propTypes = {
     }),
   ).isRequired,
   updateTask: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
 };
 
 export default Board;

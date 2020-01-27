@@ -10,13 +10,7 @@ const App = () => {
     'Done',
   ]);
   const [title] = useLocalStorage('board-name', 'Project A');
-  const [tasks, setTasks] = useLocalStorage('tasks', [
-    {
-      task: 'Add ability to edit title',
-      id: 1,
-      lane: 'To Do',
-    },
-  ]);
+  const [tasks, setTasks] = useLocalStorage('tasks', []);
 
   const updateTask = (taskId, lane) => {
     const newTasks = tasks.map(task => {
@@ -32,6 +26,15 @@ const App = () => {
     setTasks(newTasks);
   };
 
+  const addTask = (task, lane) => {
+    const id = tasks.reduce((currentId, currentTask) => {
+      return currentId > currentTask.currentId + 1
+        ? currentId
+        : currentTask.id + 1;
+    }, 0);
+    setTasks([...tasks, { task, lane, id }]);
+  };
+
   return (
     <div className="app">
       <Board
@@ -39,6 +42,7 @@ const App = () => {
         title={title}
         tasks={tasks}
         updateTask={updateTask}
+        addTask={addTask}
       />
     </div>
   );

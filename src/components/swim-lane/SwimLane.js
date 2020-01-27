@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import Card from '../card/Card';
 import Button from '../button/Button';
+import TextInput from '../text-input/TextInput';
 import { ReactComponent as Plus } from '../../assets/add-24px.svg';
 import './SwimLane.css';
 
 const Modal = React.lazy(() => import('../modal/Modal'));
 
-const SwimLane = ({ heading, tasks, updateTask }) => {
+const SwimLane = ({ heading, tasks, updateTask, addTask }) => {
   const [{ isOver }, drop] = useDrop({
     accept: 'CARD',
     drop: card => updateTask(card.id, heading),
@@ -17,9 +18,30 @@ const SwimLane = ({ heading, tasks, updateTask }) => {
     }),
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTask, setNewTask] = useState('');
 
   const toggleModal = () => {
-    setIsModalOpen(currentState => !currentState);
+    setIsModalOpen(currentState => {
+      if (currentState) {
+        setNewTask('');
+      }
+
+      return !currentState;
+    });
+  };
+
+  const onNewTaskValueChange = event => {
+    setNewTask(event.target.value);
+  };
+
+  const onNewTaskSubmit = event => {
+    event.preventDefault();
+
+    if (newTask) {
+      addTask(newTask, heading);
+      setNewTask('');
+      toggleModal();
+    }
   };
 
   return (
@@ -55,7 +77,22 @@ const SwimLane = ({ heading, tasks, updateTask }) => {
               <Modal closeModal={toggleModal}>
                 <>
                   <h6 className="modal--heading">Add Task</h6>
-                  <div className="modal--body">asdfasdf</div>
+                  <div className="modal--body">
+                    <form onSubmit={onNewTaskSubmit}>
+                      <TextInput
+                        value={newTask}
+                        onChange={onNewTaskValueChange}
+                        placeholder="New Task"
+                      />
+                      <button
+                        className="button--submit"
+                        type="submit"
+                        disabled={!newTask}
+                      >
+                        Add
+                      </button>
+                    </form>
+                  </div>
                 </>
               </Modal>
             )}
@@ -76,6 +113,7 @@ SwimLane.propTypes = {
     }),
   ).isRequired,
   updateTask: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
 };
 
 export default SwimLane;

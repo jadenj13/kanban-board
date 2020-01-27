@@ -1,0 +1,7 @@
+.input--text {
+  display: block;
+  width: 100%;
+  padding: var(--sm-pd);
+  box-sizing: border-box;
+  font-size: 1.4rem;
+}

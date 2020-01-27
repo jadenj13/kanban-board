@@ -9,3 +9,24 @@
   margin: 1.6rem 0;
   text-align: center;
 }
+
+.button--submit {
+  padding: 0.8rem 1.6rem;
+  border-radius: 3px;
+  background-color: var(--white);
+  cursor: pointer;
+  margin: 1rem 0 0 auto;
+  display: block;
+}
+
+.button--submit:disabled {
+  cursor: not-allowed;
+}
+
+.button--submit:disabled:hover {
+  background-color: var(--white);
+}
+
+.button--submit:hover {
+  background-color: var(--off-white);
+}
